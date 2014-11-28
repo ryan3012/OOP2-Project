@@ -16,7 +16,7 @@ public class Pizza implements ActionListener {
 	static JPanel buttonPanel = new JPanel();
 	static JRadioButton small, medium, large, xl;
 	static JCheckBox pepperoni, chicken, ham, crispybacon, tikka, steak, mushrooms, pineapple, jalapenos, peppers, sweetcorn, onions;
-	static JCheckBox wedges, garlic, taco, curry, cheese, nuggets, burger, breastbun, coke, fanta, cookies, icecream;
+	static JCheckBox wedges, garlic, taco, curry, cheese, nuggets;
 	static ImageIcon logo = new ImageIcon("pizza hut2.png");
 	static JLabel banner = new JLabel();
 	static JLabel info = new JLabel();
@@ -114,7 +114,7 @@ public class Pizza implements ActionListener {
 			sidesPanel.add(cheese);
 			nuggets = new JCheckBox("Chicken Nuggets");
 			sidesPanel.add(nuggets);
-			burger = new JCheckBox("Quarter Pounder");
+		/*	burger = new JCheckBox("Quarter Pounder");
 			sidesPanel.add(burger);
 			breastbun = new JCheckBox("Breast in a Bun");
 			sidesPanel.add(breastbun);
@@ -126,7 +126,7 @@ public class Pizza implements ActionListener {
 			sidesPanel.add(cookies);
 			icecream = new JCheckBox("Ice Cream");
 			sidesPanel.add(icecream);
-			
+		*/	
 		}
 		
 		public static void includeBorders() {
@@ -220,7 +220,7 @@ public class Pizza implements ActionListener {
 			if (nuggets.isSelected()) {
 				sideOrder += " Chicken Strips";
 				sides += 4.50;}
-			if (burger.isSelected()) {
+/*			if (burger.isSelected()) {
 				sideOrder += "Hamburger\n";
 				sides += 4.50;}
 			if (breastbun.isSelected()) {
@@ -238,6 +238,7 @@ public class Pizza implements ActionListener {
 			if (icecream.isSelected()) {
 				sideOrder += "Ice Cream\n";
 				sides += 2.50;}
+				*/
 			
 			total = size + toppings + sides;
 			
@@ -266,13 +267,13 @@ public class Pizza implements ActionListener {
 			curry.setSelected(false);
 			cheese.setSelected(false);
 			nuggets.setSelected(false);
-			burger.setSelected(false);
+/*			burger.setSelected(false);
 			breastbun.setSelected(false);
 			coke.setSelected(false);
 			fanta.setSelected(false);
 			cookies.setSelected(false);
 			icecream.setSelected(false);
-
+*/
 			small.setSelected(true);
 			medium.setSelected(false);
 			large.setSelected(false);
