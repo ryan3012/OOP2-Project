@@ -3,10 +3,13 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
+
+//a way of having custom output found on http://www.tech-recipes.com/rx/1326/java-decimal-format-to-easily-create-custom-output/
 import java.text.DecimalFormat;
 
 public class Pizza implements ActionListener {
-
+	
+	//Create panels
 	static JPanel logoPanel = new JPanel();
 	static JPanel sizePanel = new JPanel();
 	static JPanel radioPanel = new JPanel();
@@ -14,28 +17,34 @@ public class Pizza implements ActionListener {
 	static JPanel sidesPanel = new JPanel();
 	static JPanel orderPanel = new JPanel();
 	static JPanel buttonPanel = new JPanel();
+	//Create radio buttons
 	static JRadioButton small, medium, large, xl;
+	//Create checkbox for options
 	static JCheckBox pepperoni, chicken, ham, crispybacon, tikka, steak, mushrooms, pineapple, jalapenos, peppers, sweetcorn, onions;
 	static JCheckBox wedges, garlic, taco, curry, cheese, nuggets;
 	static ImageIcon logo = new ImageIcon("pizza hut2.png");
 	static JLabel banner = new JLabel();
 	static JLabel info = new JLabel();
+	//create to show info
 	static JTextArea orderText = new JTextArea(10,50);
+	//create buttons
 	static JButton order = new JButton("Add to Order");
 	static JButton submit = new JButton("Submit Order");
 	static JButton cancel = new JButton("Reset");
 	static JButton quit = new JButton("Exit");
+	//create menubar
 	JMenuBar menubar = new JMenuBar();
 	JMenu filemenu = new JMenu("File");
 	JMenuItem exit = new JMenuItem("Exit");
-	
+	//set prices
 	static double total = 0.0;
 	static double smallPizza = 7.0;
 	static double medPizza = 10.0;
 	static double largePizza = 14.0;
 	static double xlPizza = 20.0;
-	static String address;
+	//static String address;
 	
+	//create this as shortcut to having 2 numbers after the .
 	DecimalFormat twoDigits = new DecimalFormat ("0.00");
 	
 	public static void includeSizes() {
@@ -43,11 +52,16 @@ public class Pizza implements ActionListener {
 		BorderLayout size = new BorderLayout();
 		sizePanel.setLayout(size);
 		
+		//looked up on how best to use radio buttons by using buttongroup https://docs.oracle.com/javase/tutorial/uiswing/components/buttongroup.html
 		ButtonGroup sizes = new ButtonGroup();
 		
+		//create radio button
 		small = new JRadioButton("Small: €7"); 
+		//set the small pizza to be chosen at the start	
 		small.setSelected(true);
+		//add button to the radio panel
 		radioPanel.add(small);
+		//add small to the sizes
 		sizes.add(small);
 		
 		medium = new JRadioButton("Medium: €10");
@@ -67,8 +81,10 @@ public class Pizza implements ActionListener {
 		public static void includeToppings() {
 			
 			//info = new JLabel("Toppings are 50c each\n");
+			
 			GridLayout gl = new GridLayout(3,3);
 			toppingPanel.setLayout(gl);
+			
 			
 			pepperoni = new JCheckBox("Pepperoni");
 			toppingPanel.add(pepperoni);
@@ -129,7 +145,9 @@ public class Pizza implements ActionListener {
 		*/	
 		}
 		
+		//to make borders for outside of the options https://docs.oracle.com/javase/tutorial/uiswing/components/border.html
 		public static void includeBorders() {
+		
 			Border b1 = BorderFactory.createTitledBorder("Sizes");
 			sizePanel.setBorder(b1);
 			
@@ -139,7 +157,7 @@ public class Pizza implements ActionListener {
 			Border b3 = BorderFactory.createTitledBorder("Side Orders");
 			sidesPanel.setBorder(b3);
 		}
-
+		//to determine the total price by checking what was selected and adding on
 		public void findPrice() {
 			String pizzaOrder = "Pizza size:\n";
 			String sideOrder = "Your sides:\n";
@@ -148,6 +166,7 @@ public class Pizza implements ActionListener {
 			double sides = 0.00;
 			double toppings = 0.00;
 			
+			//used if to find whch was selected
 			if (small.isSelected())
 			{
 				size += smallPizza;
@@ -246,7 +265,7 @@ public class Pizza implements ActionListener {
 		}
 		
 		public void reset() {
-			
+			//resets all my values
 			orderText.setText("");
 			
 			pepperoni.setSelected(false);
@@ -291,9 +310,10 @@ public class Pizza implements ActionListener {
 		
 			JFrame confirm = new JFrame();
     		String message = "Are you sure you want to order?";
+    		//checking the user answer and displaying message or resetting
     		int answer = JOptionPane.showConfirmDialog(confirm, message);
     		if (answer == JOptionPane.YES_OPTION) {
-      		//JOptionPane.showMessageDialog(null, "Your order is: " +);
+      		JOptionPane.showMessageDialog(null, "Your order is on the way ");
     		} else if (answer == JOptionPane.NO_OPTION) {
     			reset();
     		}
@@ -307,6 +327,7 @@ public class Pizza implements ActionListener {
 			JFrame frame = new JFrame("Pizza Orders");
 			//JFrame = frame.setFont(Color.BLUE);
 			Container container = frame.getContentPane();
+			//X axis means vertical 
 			BoxLayout box = new BoxLayout(container, BoxLayout.Y_AXIS);
 			container.setLayout(box);
 			
