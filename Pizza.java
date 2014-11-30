@@ -80,9 +80,10 @@ public class Pizza implements ActionListener {
 		
 		public static void includeToppings() {
 			
-			//info = new JLabel("Toppings are 50c each\n");
+			
 			
 			GridLayout gl = new GridLayout(3,3);
+		//sets the toppings menu to a 3,3 size
 			toppingPanel.setLayout(gl);
 			
 			
@@ -331,45 +332,59 @@ public class Pizza implements ActionListener {
 			BoxLayout box = new BoxLayout(container, BoxLayout.Y_AXIS);
 			container.setLayout(box);
 			
-			banner.setIcon(logo);
-			logoPanel.add(banner);
+		//	banner.setIcon(logo);
+		//	logoPanel.add(banner);
 	
+	
+			// calls the methods i created
 			includeBorders();
 			includeToppings();
 			includeSizes();
 			includeSides();
 		
+		//adds exit under the file in the menu strip
 			filemenu.add(exit);
 			
+			
+			//links actionlistener to the buttons so they perform actions
 			order.addActionListener(this);
 			cancel.addActionListener(this);
 			quit.addActionListener(this);
 			submit.addActionListener(this);
 			exit.addActionListener(this);
 
+		//adds file to menu strip
 			menubar.add(filemenu);
+			
+			//adds the text box to the order panel
 			orderPanel.add(orderText);
 			
+			//adds my buttons
 			buttonPanel.add(order);
 			buttonPanel.add(submit);
 			buttonPanel.add(cancel);
 			buttonPanel.add(quit);
 			
-			container.add(logoPanel);
+	
+		// adds the panels to the containers	
 			container.add(sizePanel);
 			container.add(toppingPanel);
 			container.add(sidesPanel);
 			container.add(orderPanel);
 			container.add(buttonPanel);
 			
+			
+			
 			frame.setJMenuBar(menubar);
 			frame.setSize(300,300);
 			frame.setVisible(true);
 			frame.setResizable(false);
+		//found how to use pack on http://docs.oracle.com/javase/6/docs/api/java/awt/Window.html#pack%28%29
 			frame.pack();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
 		
+		//sets the actions behind the buttons
 		public void actionPerformed(ActionEvent action) {
 			if (action.getSource() == cancel)
 				reset();
