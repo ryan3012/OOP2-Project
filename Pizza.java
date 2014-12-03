@@ -3,14 +3,22 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
+import java.util.*;
 
 //a way of having custom output found on http://www.tech-recipes.com/rx/1326/java-decimal-format-to-easily-create-custom-output/
 import java.text.DecimalFormat;
 
-public class Pizza implements ActionListener {
+public class Pizza  extends Rewards implements ActionListener {
 	
+	
+	
+	
+/*Rewards r = new Rewards();
+ r.toString();
+ */
+ 
 	//Create panels
-	static JPanel logoPanel = new JPanel();
+
 	static JPanel sizePanel = new JPanel();
 	static JPanel radioPanel = new JPanel();
 	static JPanel toppingPanel = new JPanel();
@@ -22,11 +30,13 @@ public class Pizza implements ActionListener {
 	//Create checkbox for options
 	static JCheckBox pepperoni, chicken, ham, crispybacon, tikka, steak, mushrooms, pineapple, jalapenos, peppers, sweetcorn, onions;
 	static JCheckBox wedges, garlic, taco, curry, cheese, nuggets;
-	static ImageIcon logo = new ImageIcon("pizza hut2.png");
-	static JLabel banner = new JLabel();
-	static JLabel info = new JLabel();
-	//create to show info
-	static JTextArea orderText = new JTextArea(10,50);
+
+
+
+	//create to show info for pizza
+	static JTextArea orderText = new JTextArea(10,20);
+	//create to show cust info
+	static JTextArea infoText = new JTextArea(10,20);
 	//create buttons
 	static JButton order = new JButton("Add to Order");
 	static JButton submit = new JButton("Submit Order");
@@ -240,29 +250,12 @@ public class Pizza implements ActionListener {
 			if (nuggets.isSelected()) {
 				sideOrder += " Chicken Strips";
 				sides += 4.50;}
-/*			if (burger.isSelected()) {
-				sideOrder += "Hamburger\n";
-				sides += 4.50;}
-			if (breastbun.isSelected()) {
-				sideOrder += "Breast N Bun\n";
-				sides += 4.50;}
-			if (coke.isSelected()) {
-				sideOrder += "Coke\n";
-				sides += 2.00;}
-			if (fanta.isSelected()) {
-				sideOrder += "Fanta\n";
-				sides += 4.50;}
-			if (cookies.isSelected()) {
-				sideOrder += "Cookies\n";
-				sides += 2.50;}
-			if (icecream.isSelected()) {
-				sideOrder += "Ice Cream\n";
-				sides += 2.50;}
-				*/
+
 			
 			total = size + toppings + sides;
 			
 			orderText.setText(pizzaOrder + " \n" + sideOrder + "\nYour subtotal is: €" + twoDigits.format(total));
+
 		}
 		
 		public void reset() {
@@ -287,13 +280,6 @@ public class Pizza implements ActionListener {
 			curry.setSelected(false);
 			cheese.setSelected(false);
 			nuggets.setSelected(false);
-/*			burger.setSelected(false);
-			breastbun.setSelected(false);
-			coke.setSelected(false);
-			fanta.setSelected(false);
-			cookies.setSelected(false);
-			icecream.setSelected(false);
-*/
 			small.setSelected(true);
 			medium.setSelected(false);
 			large.setSelected(false);
@@ -310,7 +296,7 @@ public class Pizza implements ActionListener {
 	public void submit() {
 		
 			JFrame confirm = new JFrame();
-    		String message = "Are you sure you want to order?";
+    		String message = "The order will be sent to your given address";
     		//checking the user answer and displaying message or resetting
     		int answer = JOptionPane.showConfirmDialog(confirm, message);
     		if (answer == JOptionPane.YES_OPTION) {
@@ -326,7 +312,6 @@ public class Pizza implements ActionListener {
 	}
 		public void display() {
 			JFrame frame = new JFrame("Pizza Orders");
-			//JFrame = frame.setFont(Color.BLUE);
 			Container container = frame.getContentPane();
 			//X axis means vertical 
 			BoxLayout box = new BoxLayout(container, BoxLayout.Y_AXIS);
@@ -358,6 +343,7 @@ public class Pizza implements ActionListener {
 			
 			//adds the text box to the order panel
 			orderPanel.add(orderText);
+			orderPanel.add(infoText);
 			
 			//adds my buttons
 			buttonPanel.add(order);
@@ -400,9 +386,36 @@ public class Pizza implements ActionListener {
 			if (action.getSource() == submit)
 				submit();
 		}
-		
-		public static void main (String[] args) {
+	
+	/*	public static void main (String[] args) {
+			
 			Pizza app = new Pizza();
 			app.display();
-		}
-		}
+		}*/
+		
+		 public static void main (String[] args) {
+        Customer[]    cust;         //declare the cust array
+        cust = new Customer[1];    //and then create it
+        
+        
+     
+            cust[0] = new Customer( );
+            cust[0].setName  (JOptionPane.showInputDialog(null,"Enter name:"));
+            cust[0].setAge   (Integer.parseInt(JOptionPane.showInputDialog(null,"Enter age:")));
+            cust[0].setAddress( JOptionPane.showInputDialog(null,"Enter address:"));
+            
+           //  JTextArea area = new JTextArea();
+        for (Customer c : cust)
+        	infoText.append( c.toString() + "\n");
+        //	JOptionPane.showMessageDialog(null,area,"Details of my Friends", JOptionPane.PLAIN_MESSAGE);
+        infoText.append("Your loyalty points are :");
+        	
+        	
+        	
+        		Pizza app = new Pizza();
+				app.display();
+            
+        }
+    }
+		
+		

@@ -1,73 +1,81 @@
-/** Models a student,inherits from Person*/
-public class Rewards extends Customer {
+import java.util.*;
+import java.io.*;
 
-  private String studentNumber;
-  private String course;							 		
+public class Rewards extends Customer  {
+
+  private int rewardPoints;
+  private String restaurant;							 		
   		
   public Rewards() {
   
-	    super();
-	    setStudentNumber("Unknown");
-	    setCourse("Unassigned");
+	  //  super();
+	    setrewardPoints(0);
+	    setrestaurant("Unknown");
   }
 
-  public Rewards(String snum,String c, String name,int age, String address){
-	     //new Person(name,age,gender);
-	     super(name,age,address);
-	     //setName(name);
-	     //setAge(age);
-	     //setGender(gender);
-	     setStudentNumber(snum);
-	     setCourse(c);
+  public Rewards(int rewpoint,String rest, String name,int age, String address){
+	     
+	    // super(name,age,address);
+	     
+	     setrewardPoints(rewpoint);
+	     setrestaurant(rest);
   }
 
-  public String getStudentNumber(){
-	     return studentNumber;
+  public int getrewardPoints(){
+  	 rewardPoints=100;
+	     return rewardPoints;
   }
 
-  public String getCourse() {
-	     return course;
-  }
-
-  public void setStudentNumber(String snum){
-	     studentNumber=snum;
-  }
-
-  public void setCourse(String c){
-	     course=c;
+  public String getrestaurant() {
+  	restaurant = "pizza place";
+	     return restaurant;
   }
   
- /* public String toString(){
-	     return "Student Number is " + getStudentNumber() + 
-	     "\nCourse is " + getCourse() + 
+ 
+  
+  public void setrewardPoints(int rewpoint){
+	     rewardPoints=rewpoint;
+  }
+
+  public void setrestaurant(String rest){
+	     restaurant=rest;
+  }
+  	
+  public String toString(){
+	     return ("Reward points earned are " + getrewardPoints() + 
+	     "\nRestaurant you ate at is " + getrestaurant() + 
 	     "\nName is " + getName() +
 	     "\nAge is " + getAge() +
-	     "\nGender is " + getGender();
-  }	*/
-  	// alternative way to write subclass toString()
-  	  public String toString(){
-	     return "Student Number is " + getStudentNumber() + 
-	     "\nCourse is " + getCourse() + 
-	     "\nOther details: " + super.toString();
+	     "\nAddress is " + getAddress());
+  }
+  	
+  	 //alternative way to write subclass toString()
+  	/*  public String toString(){
+	     return super.toString() + Rewards.toString() + "Reward points earned " + getrewardPoints() + 
+	     "\nYour restaurant " + getrestaurant() + 
+	     "\nOther details: ";  
    } 
+   	*/
    	
-   	//sets the person with not given variables
    	public static void main (String args[]){
    		Customer v1 = new Customer();
-   		System.out.println(v1.toString());
+   		Rewards r1 = new Rewards();
+   		
+   		LinkedList<Rewards> rewards = new LinkedList<Rewards>();
+   		
+   		//this would be customer 1?
+   		rewards.add(r1);
+   		
+   		v1.setRewards(rewards);
+   		
+   		
+   	/*	System.out.println(rewards.toString());
+   	 
+			Pizza app = new Pizza();
+			app.display();
+	*/
    	}
    	
-   	/*
-   public String hug(int x){
-   	
-   	return "You've benn hugged " +x+ " times";
-   	
-   }
-   	public String kiss(int x){
-   	
-   	return "Get Lost";
-   	
-   }
-  */
+ 
     		
 }
