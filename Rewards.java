@@ -1,24 +1,24 @@
 import java.util.*;
 import java.io.*;
 
-public class Rewards extends Customer  {
+public class  Rewards extends Customer  {
 
   private int rewardPoints;
-  private String restaurant;							 		
+ // private String restaurant;							 		
   		
   public Rewards() {
   
 	  //  super();
 	    setrewardPoints(0);
-	    setrestaurant("Unknown");
+	   // setrestaurant("Unknown");
   }
 
-  public Rewards(int rewpoint,String rest, String name,int age, String address){
+  public Rewards(int rewpoint){
 	     
 	    // super(name,age,address);
 	     
 	     setrewardPoints(rewpoint);
-	     setrestaurant(rest);
+	    // setrestaurant(rest);
   }
 
   public int getrewardPoints(){
@@ -26,10 +26,10 @@ public class Rewards extends Customer  {
 	     return rewardPoints;
   }
 
-  public String getrestaurant() {
-  	restaurant = "pizza place";
-	     return restaurant;
-  }
+ // public String getrestaurant() {
+ // 	restaurant = "pizza place";
+//	     return restaurant;
+ // }
   
  
   
@@ -37,16 +37,16 @@ public class Rewards extends Customer  {
 	     rewardPoints=rewpoint;
   }
 
-  public void setrestaurant(String rest){
-	     restaurant=rest;
-  }
+ // public void setrestaurant(String rest){
+//	     restaurant=rest;
+ // }
   	
   public String toString(){
-	     return ("Reward points earned are " + getrewardPoints() + 
-	     "\nRestaurant you ate at is " + getrestaurant() + 
-	     "\nName is " + getName() +
-	     "\nAge is " + getAge() +
-	     "\nAddress is " + getAddress());
+	     return ("Reward points earned are " + getrewardPoints()); 
+	  //   "\nRestaurant you ate at is " + getrestaurant() + 
+	  //   "\nName is " + getName() +
+	  //   "\nAge is " + getAge() +
+	  //   "\nAddress is " + getAddress());
   }
   	
   	 //alternative way to write subclass toString()
@@ -58,22 +58,22 @@ public class Rewards extends Customer  {
    	*/
    	
    	public static void main (String args[]){
-   		Customer v1 = new Customer();
-   		Rewards r1 = new Rewards();
+   	//	Customer v1 = new Customer();
+   	//	Rewards r1 = new Rewards();
    		
-   		LinkedList<Rewards> rewards = new LinkedList<Rewards>();
+   	//	LinkedList<Rewards> rewards = new LinkedList<Rewards>();
    		
    		//this would be customer 1?
-   		rewards.add(r1);
+   	//	rewards.add(r1);
    		
-   		v1.setRewards(rewards);
+   	//	v1.setRewards(rewards);
    		
    		
-   	/*	System.out.println(rewards.toString());
+//   		System.out.println(rewardPoints());
    	 
-			Pizza app = new Pizza();
-			app.display();
-	*/
+		//	Pizza app = new Pizza();
+		//	app.display();
+
    	}
    	
  

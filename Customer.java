@@ -12,8 +12,8 @@ public class Customer {
 
 	public int getAge() {
 		String ageAsString;
-		ageAsString = JOptionPane.showInputDialog("Enter age : ");
-		age = Integer.parseInt(ageAsString);
+	//	ageAsString = JOptionPane.showInputDialog("Enter age : ");
+	//	age = Integer.parseInt(ageAsString);
 //		System.out.println("Enter age");
 	//	age = input.nextInt(); 
 		return age;
@@ -23,15 +23,15 @@ public class Customer {
 	//	System.out.println("enter address");
 	//	input.nextLine();
 	//	address = input.nextLine();
-	address = JOptionPane.showInputDialog("Enter your address : ");
+//	address = JOptionPane.showInputDialog("Enter your address : ");
 		return address;
 		 }
 	public String getName() {
-	name = JOptionPane.showInputDialog("Enter your name : ");
+//	name = JOptionPane.showInputDialog("Enter your name : ");
 		 return name;
 		 }
 		 
-/*	public String getRewards() {
+	public String getRewards() {
 		 //loop goes through rewards linkedlist adds on rewards
 		 String rewardList="";
 	//	 for(String num; num<rewards.size(); num++)
@@ -40,7 +40,7 @@ public class Customer {
 		 return rewardList;
 	}
 	
-	/*
+	
 		 
 		 
 		 /*
@@ -63,16 +63,16 @@ public class Customer {
 				this.address = address;
 	}
 	
-	public void setRewards(LinkedList <Rewards> rewards) {
-				this.rewards = rewards;
-	}
+//	public void setRewards(LinkedList <Rewards> rewards) {
+//				this.rewards = rewards;
+//	}
 
 //	public Customer(String name, int age, String address,LinkedList <Rewards> rewards) {
 		public Customer(String name, int age, String address) {
 				setName(name);
 				setAge(age);
 				setAddress(address);
-				setRewards(rewards);
+			//	setRewards(rewards);
 	}
 	
 
@@ -83,12 +83,14 @@ public class Customer {
 	
 		
 
-/*	public String toString() {
+
+
+
+
+	public String toString() {
 				return "Your name : " + getName() +  "\n" + "Your age : " + getAge() + "\n" + "Your address : " + getAddress() + "\n" + getRewards();
 	}
+
 }
-*/
-public String toString() {
-				return "Your name : " + getName() +  "\n" + "Your age : " + getAge() + "\n" + "Your address : " + getAddress();
-	}
-}
+
+

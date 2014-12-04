@@ -387,29 +387,39 @@ public class Pizza  extends Rewards implements ActionListener {
 				submit();
 		}
 	
-	/*	public static void main (String[] args) {
-			
-			Pizza app = new Pizza();
-			app.display();
-		}*/
+
 		
 		 public static void main (String[] args) {
-        Customer[]    cust;         //declare the cust array
-        cust = new Customer[1];    //and then create it
+   
+         Customer  customer;
+        LinkedList<Customer>cust; // declare a list of customers
+		
+        //Create the list, then add members to it
+        cust = new LinkedList<Customer>( );
         
+         
         
-     
-            cust[0] = new Customer( );
-            cust[0].setName  (JOptionPane.showInputDialog(null,"Enter name:"));
-            cust[0].setAge   (Integer.parseInt(JOptionPane.showInputDialog(null,"Enter age:")));
-            cust[0].setAddress( JOptionPane.showInputDialog(null,"Enter address:"));
-            
-           //  JTextArea area = new JTextArea();
-        for (Customer c : cust)
-        	infoText.append( c.toString() + "\n");
-        //	JOptionPane.showMessageDialog(null,area,"Details of my Friends", JOptionPane.PLAIN_MESSAGE);
-        infoText.append("Your loyalty points are :");
-        	
+       
+        customer = new Customer();
+         customer.setName(JOptionPane.showInputDialog("enter name :")); 
+     	 customer.setAddress(JOptionPane.showInputDialog("enter address :"));
+         customer.setAge(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter age:")));
+    	 cust.add(customer);
+
+
+
+        // display the list, using an iterator
+        Iterator<Customer> iterator = cust.iterator();
+        while (iterator.hasNext()) {
+            customer = iterator.next();
+           // System.out.println( customer.getName( ));
+           // System.out.println(customer.getName());
+          //  System.out.println(customer.getAddress());
+          //  System.out.println(customer.getAge());	
+        infoText.append( "Your name is " + customer.getName() + "\n");
+        infoText.append( "Your address is " + customer.getAddress() + "\n");
+        infoText.append( "Your age is " + customer.getAge() + "\n");
+//        infoText.append("Your loyalty points are :" + getrewardPoints());	
         	
         	
         		Pizza app = new Pizza();
@@ -417,5 +427,7 @@ public class Pizza  extends Rewards implements ActionListener {
             
         }
     }
+}
+
 		
 		
