@@ -4,11 +4,12 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import java.util.*;
+import java.io.*;
 
 //a way of having custom output found on http://www.tech-recipes.com/rx/1326/java-decimal-format-to-easily-create-custom-output/
 import java.text.DecimalFormat;
 
-public class Pizza  extends Rewards implements ActionListener {
+public class Pizza  extends Rewards implements ActionListener, Serializable {
 	
 	
 	
@@ -46,6 +47,7 @@ public class Pizza  extends Rewards implements ActionListener {
 	JMenuBar menubar = new JMenuBar();
 	JMenu filemenu = new JMenu("File");
 	JMenuItem exit = new JMenuItem("Exit");
+//	JMenuItem load = new JMenuItem("Load");
 	//set prices
 	static double total = 0.0;
 	static double smallPizza = 7.0;
@@ -141,19 +143,7 @@ public class Pizza  extends Rewards implements ActionListener {
 			sidesPanel.add(cheese);
 			nuggets = new JCheckBox("Chicken Nuggets");
 			sidesPanel.add(nuggets);
-		/*	burger = new JCheckBox("Quarter Pounder");
-			sidesPanel.add(burger);
-			breastbun = new JCheckBox("Breast in a Bun");
-			sidesPanel.add(breastbun);
-			coke = new JCheckBox("Coca Cola");
-			sidesPanel.add(coke);
-			fanta = new JCheckBox("Fanta Orange");
-			sidesPanel.add(fanta);
-			cookies = new JCheckBox("Cookies");
-			sidesPanel.add(cookies);
-			icecream = new JCheckBox("Ice Cream");
-			sidesPanel.add(icecream);
-		*/	
+		
 		}
 		
 		//to make borders for outside of the options https://docs.oracle.com/javase/tutorial/uiswing/components/border.html
@@ -254,6 +244,10 @@ public class Pizza  extends Rewards implements ActionListener {
 			
 			total = size + toppings + sides;
 			
+			
+			
+			
+			
 			orderText.setText(pizzaOrder + " \n" + sideOrder + "\nYour subtotal is: €" + twoDigits.format(total));
 
 		}
@@ -261,6 +255,7 @@ public class Pizza  extends Rewards implements ActionListener {
 		public void reset() {
 			//resets all my values
 			orderText.setText("");
+			 infoText.setText("");
 			
 			pepperoni.setSelected(false);
 			mushrooms.setSelected(false);
@@ -309,7 +304,34 @@ public class Pizza  extends Rewards implements ActionListener {
 		public void exit() {
 		
 		System.exit(0);
-	}
+		}
+
+		
+	/*	public void load(){
+LinkedList<Customer>cust = new LinkedList <Customer>(); // declare a list of customers
+		
+    
+	
+	try{
+	
+	File custs = new File("Customer.dat");
+	
+	FileInputStream fis = new FileInputStream(custs);
+	ObjectInputStream ois = new ObjectInputStream(fis);
+	cust =(LinkedList<Customer>) ois.readObject();
+		
+	}//end try
+	catch(Exception e){
+	System.out.println(e);
+		
+	}//end catch
+	
+	for(Customer c : cust){
+		System.out.println(c);
+		}
+		}
+		
+	*/
 		public void display() {
 			JFrame frame = new JFrame("Pizza Orders");
 			Container container = frame.getContentPane();
@@ -317,8 +339,7 @@ public class Pizza  extends Rewards implements ActionListener {
 			BoxLayout box = new BoxLayout(container, BoxLayout.Y_AXIS);
 			container.setLayout(box);
 			
-		//	banner.setIcon(logo);
-		//	logoPanel.add(banner);
+		
 	
 	
 			// calls the methods i created
@@ -329,6 +350,7 @@ public class Pizza  extends Rewards implements ActionListener {
 		
 		//adds exit under the file in the menu strip
 			filemenu.add(exit);
+		//	filemenu.add(load);
 			
 			
 			//links actionlistener to the buttons so they perform actions
@@ -337,6 +359,7 @@ public class Pizza  extends Rewards implements ActionListener {
 			quit.addActionListener(this);
 			submit.addActionListener(this);
 			exit.addActionListener(this);
+		//	load.addActionListener(this);
 
 		//adds file to menu strip
 			menubar.add(filemenu);
@@ -385,28 +408,49 @@ public class Pizza  extends Rewards implements ActionListener {
 		else
 			if (action.getSource() == submit)
 				submit();
+				
+	//		if (action.getSource() == load)
+	//		load();
+				
 		}
+	
 	
 
 		
-		 public static void main (String[] args) {
+		 public static void main (String[] args) throws FileNotFoundException,IOException {
    
          Customer  customer;
         LinkedList<Customer>cust; // declare a list of customers
 		
+		Rewards rewards;
+		LinkedList<Rewards>reward;
+		
         //Create the list, then add members to it
         cust = new LinkedList<Customer>( );
-        
+        reward = new LinkedList <Rewards>();
          
         
        
         customer = new Customer();
-         customer.setName(JOptionPane.showInputDialog("enter name :")); 
+         customer.setName(JOptionPane.showInputDialog("enter name :"));
+        
+ 			
      	 customer.setAddress(JOptionPane.showInputDialog("enter address :"));
          customer.setAge(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter age:")));
     	 cust.add(customer);
+    	 rewards = new Rewards();
+    	 rewards.getrewardPoints();
+    	 reward.add(rewards);
+    	 
+    	 
+	
 
 
+	Pizza app = new Pizza();
+				app.display();
+				
+				
+					
 
         // display the list, using an iterator
         Iterator<Customer> iterator = cust.iterator();
@@ -419,15 +463,28 @@ public class Pizza  extends Rewards implements ActionListener {
         infoText.append( "Your name is " + customer.getName() + "\n");
         infoText.append( "Your address is " + customer.getAddress() + "\n");
         infoText.append( "Your age is " + customer.getAge() + "\n");
-//        infoText.append("Your loyalty points are :" + getrewardPoints());	
+        infoText.append("You have just earned " + rewards.getrewardPoints() + " reward points");	
+        
+        
+
+
+/*
+		File custFile = new File("Customer.dat");
+		FileOutputStream fos = new FileOutputStream(custFile);
+		
+		ObjectOutputStream os = new ObjectOutputStream(fos);
+		os.writeObject(cust);
+		os.close();
+		
+		
+		*/
         	
         	
-        		Pizza app = new Pizza();
-				app.display();
             
         }
     }
 }
+
 
 		
 		

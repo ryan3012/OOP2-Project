@@ -1,14 +1,15 @@
 import java.util.*;
 import javax.swing.*;
+import java.io.*;
 
-public class Customer {
+public class Customer implements Serializable {
 	private String name;
 	private int age;
 	private String address;
-	private LinkedList <Rewards> rewards;
+//	private LinkedList <Rewards> rewards;
 	
 	
-	Scanner input = new Scanner (System.in);
+//	Scanner input = new Scanner (System.in);
 
 	public int getAge() {
 		String ageAsString;
@@ -31,7 +32,7 @@ public class Customer {
 		 return name;
 		 }
 		 
-	public String getRewards() {
+/*	public String getRewards() {
 		 //loop goes through rewards linkedlist adds on rewards
 		 String rewardList="";
 	//	 for(String num; num<rewards.size(); num++)
@@ -40,7 +41,7 @@ public class Customer {
 		 return rewardList;
 	}
 	
-	
+	/*
 		 
 		 
 		 /*
@@ -83,14 +84,12 @@ public class Customer {
 	
 		
 
-
-
-
-
-	public String toString() {
+/*	public String toString() {
 				return "Your name : " + getName() +  "\n" + "Your age : " + getAge() + "\n" + "Your address : " + getAddress() + "\n" + getRewards();
 	}
-
 }
-
-
+*/
+public String toString() {
+				return "Your name: " + getName() +  "\n" + "Your age : " + getAge() + "\n" + "Your address : " + getAddress();
+	}
+}
