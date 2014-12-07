@@ -1,10 +1,14 @@
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
-import java.awt.image.*;
 import java.awt.event.*;
 import java.util.*;
 import java.io.*;
+
+//Ryan Crane
+//OOP2 CA
+
+
 
 //a way of having custom output found on http://www.tech-recipes.com/rx/1326/java-decimal-format-to-easily-create-custom-output/
 import java.text.DecimalFormat;
@@ -14,11 +18,9 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 	
 	
 	
-/*Rewards r = new Rewards();
- r.toString();
- */
+
  
-	//Create panels
+	//Create panels,static because of static methods using them
 
 	static JPanel sizePanel = new JPanel();
 	static JPanel radioPanel = new JPanel();
@@ -93,7 +95,7 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 		public static void includeToppings() {
 			
 			
-			
+			//gridlayout option found here https://docs.oracle.com/javase/tutorial/uiswing/layout/grid.html
 			GridLayout gl = new GridLayout(3,3);
 		//sets the toppings menu to a 3,3 size
 			toppingPanel.setLayout(gl);
@@ -247,7 +249,7 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 			
 			
 			
-			
+			//adds total to ordertext jtextarea
 			orderText.setText(pizzaOrder + " \n" + sideOrder + "\nYour subtotal is: €" + twoDigits.format(total));
 
 		}
@@ -306,36 +308,11 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 		System.exit(0);
 		}
 
-		
-	/*	public void load(){
-LinkedList<Customer>cust = new LinkedList <Customer>(); // declare a list of customers
-		
-    
-	
-	try{
-	
-	File custs = new File("Customer.dat");
-	
-	FileInputStream fis = new FileInputStream(custs);
-	ObjectInputStream ois = new ObjectInputStream(fis);
-	cust =(LinkedList<Customer>) ois.readObject();
-		
-	}//end try
-	catch(Exception e){
-	System.out.println(e);
-		
-	}//end catch
-	
-	for(Customer c : cust){
-		System.out.println(c);
-		}
-		}
-		
-	*/
+
 		public void display() {
 			JFrame frame = new JFrame("Pizza Orders");
 			Container container = frame.getContentPane();
-			//X axis means vertical 
+			//boxlayout stacks on top of eachother 
 			BoxLayout box = new BoxLayout(container, BoxLayout.Y_AXIS);
 			container.setLayout(box);
 			
@@ -359,7 +336,7 @@ LinkedList<Customer>cust = new LinkedList <Customer>(); // declare a list of cus
 			quit.addActionListener(this);
 			submit.addActionListener(this);
 			exit.addActionListener(this);
-		//	load.addActionListener(this);
+		
 
 		//adds file to menu strip
 			menubar.add(filemenu);
@@ -409,8 +386,7 @@ LinkedList<Customer>cust = new LinkedList <Customer>(); // declare a list of cus
 			if (action.getSource() == submit)
 				submit();
 				
-	//		if (action.getSource() == load)
-	//		load();
+
 				
 		}
 	
@@ -423,14 +399,14 @@ LinkedList<Customer>cust = new LinkedList <Customer>(); // declare a list of cus
         LinkedList<Customer>cust; // declare a list of customers
 		
 		Rewards rewards;
-		LinkedList<Rewards>reward;
+		LinkedList<Rewards>reward; //declare a linkedlist for rewards
 		
         //Create the list, then add members to it
         cust = new LinkedList<Customer>( );
         reward = new LinkedList <Rewards>();
          
         
-       
+       //sets attributes for linkedlist
         customer = new Customer();
          customer.setName(JOptionPane.showInputDialog("enter name :"));
         
@@ -442,10 +418,8 @@ LinkedList<Customer>cust = new LinkedList <Customer>(); // declare a list of cus
     	 rewards.getrewardPoints();
     	 reward.add(rewards);
     	 
-    	 
-	
-
-
+    
+    //starts gui pizza	 
 	Pizza app = new Pizza();
 				app.display();
 				
@@ -456,10 +430,8 @@ LinkedList<Customer>cust = new LinkedList <Customer>(); // declare a list of cus
         Iterator<Customer> iterator = cust.iterator();
         while (iterator.hasNext()) {
             customer = iterator.next();
-           // System.out.println( customer.getName( ));
-           // System.out.println(customer.getName());
-          //  System.out.println(customer.getAddress());
-          //  System.out.println(customer.getAge());	
+        
+        //adds input to the jtextarea infotext	
         infoText.append( "Your name is " + customer.getName() + "\n");
         infoText.append( "Your address is " + customer.getAddress() + "\n");
         infoText.append( "Your age is " + customer.getAge() + "\n");
@@ -468,19 +440,38 @@ LinkedList<Customer>cust = new LinkedList <Customer>(); // declare a list of cus
         
 
 
-/*
-		File custFile = new File("Customer.dat");
-		FileOutputStream fos = new FileOutputStream(custFile);
-		
-		ObjectOutputStream os = new ObjectOutputStream(fos);
-		os.writeObject(cust);
-		os.close();
-		
-		
-		*/
-        	
-        	
-            
+		//Creates new linkedlist + rewards
+		LinkedList<Customer>cust1;
+		cust1 = new LinkedList<Customer>( );
+		cust1.add(customer);
+
+		//Rewards rewards;
+		LinkedList<Rewards>reward1;
+		reward1 = new LinkedList <Rewards>();
+		rewards.getrewardPoints();
+		reward1.add(rewards);
+
+
+//saves to file, http://beginwithjava.blogspot.ie/2011/04/java-file-save-and-file-load-objects.html
+
+try{  // Catch errors in I/O if necessary.
+
+FileOutputStream saveFile=new FileOutputStream("SaveCust.dat");
+
+// Create an ObjectOutputStream to put objects into save file.
+ObjectOutputStream save = new ObjectOutputStream(saveFile);
+
+// Now we do the save.
+
+save.writeObject(cust1);
+save.writeObject(reward1);
+
+// Close the file.
+save.close(); // This also closes saveFile.
+}
+catch(Exception exc){
+exc.printStackTrace(); // If there was an error, print the info.
+}          
         }
     }
 }
