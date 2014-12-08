@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-	public class Rewards extends Customer  {
+	public class Rewards   {
 	
 	  private int rewardPoints;
 	 							 		

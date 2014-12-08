@@ -11,6 +11,8 @@ import java.io.*;
 
 
 //a way of having custom output found on http://www.tech-recipes.com/rx/1326/java-decimal-format-to-easily-create-custom-output/
+//By William Wilson
+
 import java.text.DecimalFormat;
 
 public class Pizza  extends Rewards implements ActionListener, Serializable {
@@ -312,7 +314,7 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 		public void display() {
 			JFrame frame = new JFrame("Pizza Orders");
 			Container container = frame.getContentPane();
-			//boxlayout stacks on top of eachother 
+			//boxlayout stacks on top of eachother, found info from http://docs.oracle.com/javase/tutorial/uiswing/layout/box.html 
 			BoxLayout box = new BoxLayout(container, BoxLayout.Y_AXIS);
 			container.setLayout(box);
 			
@@ -325,9 +327,9 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 			includeSizes();
 			includeSides();
 		
-		//adds exit under the file in the menu strip
+			//adds exit under the file in the menu strip
 			filemenu.add(exit);
-		//	filemenu.add(load);
+		
 			
 			
 			//links actionlistener to the buttons so they perform actions
@@ -338,7 +340,7 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 			exit.addActionListener(this);
 		
 
-		//adds file to menu strip
+			//adds file to menu strip
 			menubar.add(filemenu);
 			
 			//adds the text box to the order panel
@@ -352,7 +354,7 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 			buttonPanel.add(quit);
 			
 	
-		// adds the panels to the containers	
+			// adds the panels to the containers	
 			container.add(sizePanel);
 			container.add(toppingPanel);
 			container.add(sidesPanel);
@@ -365,117 +367,117 @@ public class Pizza  extends Rewards implements ActionListener, Serializable {
 			frame.setSize(300,300);
 			frame.setVisible(true);
 			frame.setResizable(false);
-		//found how to use pack on http://docs.oracle.com/javase/6/docs/api/java/awt/Window.html#pack%28%29
+			//found how to use pack on http://docs.oracle.com/javase/6/docs/api/java/awt/Window.html#pack%28%29
 			frame.pack();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
 		
-		//sets the actions behind the buttons
-		public void actionPerformed(ActionEvent action) {
-			if (action.getSource() == cancel)
-				reset();
+			//sets the actions behind the buttons
+			public void actionPerformed(ActionEvent action) {
+				if (action.getSource() == cancel)
+					reset();
+				else
+				if (action.getSource() == order)
+					findPrice();
+				else
+				if (action.getSource() == quit)
+					quit();
+				if (action.getSource() == exit)
+				exit();
 			else
-			if (action.getSource() == order)
-				findPrice();
-			else
-			if (action.getSource() == quit)
-				quit();
-			if (action.getSource() == exit)
-			exit();
-		else
-			if (action.getSource() == submit)
-				submit();
-				
-
-				
-		}
+				if (action.getSource() == submit)
+					submit();
+					
+	
+					
+			}
 	
 	
 
 		
-		 public static void main (String[] args) throws FileNotFoundException,IOException {
-   
-         Customer  customer;
-        LinkedList<Customer>cust; // declare a list of customers
-		
-		Rewards rewards;
-		LinkedList<Rewards>reward; //declare a linkedlist for rewards
-		
-        //Create the list, then add members to it
-        cust = new LinkedList<Customer>( );
-        reward = new LinkedList <Rewards>();
-         
-        
-       //sets attributes for linkedlist
-        customer = new Customer();
-         customer.setName(JOptionPane.showInputDialog("enter name :"));
-        
- 			
-     	 customer.setAddress(JOptionPane.showInputDialog("enter address :"));
-         customer.setAge(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter age:")));
-    	 cust.add(customer);
-    	 rewards = new Rewards();
-    	 rewards.getrewardPoints();
-    	 reward.add(rewards);
-    	 
-    
-    //starts gui pizza	 
-	Pizza app = new Pizza();
-				app.display();
-				
+			 public static void main (String[] args) throws FileNotFoundException,IOException {
+	   
+	         Customer  customer;
+	        LinkedList<Customer>cust; // declare a list of customers
+			
+			Rewards rewards;
+			LinkedList<Rewards>reward; //declare a linkedlist for rewards
+			
+	        //Create the list, then add members to it
+	        cust = new LinkedList<Customer>( );
+	        reward = new LinkedList <Rewards>();
+	         
+	        
+	       //sets attributes for linkedlist
+	        customer = new Customer();
+	         customer.setName(JOptionPane.showInputDialog("enter name :"));
+	        
+	 			
+	     	 customer.setAddress(JOptionPane.showInputDialog("enter address :"));
+	         customer.setAge(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter age:")));
+	    	 cust.add(customer);
+	    	 rewards = new Rewards();
+	    	 rewards.getrewardPoints();
+	    	 reward.add(rewards);
+	    	 
+	    
+	    //starts gui pizza	 
+		Pizza app = new Pizza();
+					app.display();
+					
 				
 					
-
-        // display the list, using an iterator
-        Iterator<Customer> iterator = cust.iterator();
-        while (iterator.hasNext()) {
-            customer = iterator.next();
-        
-        //adds input to the jtextarea infotext	
-        infoText.append( "Your name is " + customer.getName() + "\n");
-        infoText.append( "Your address is " + customer.getAddress() + "\n");
-        infoText.append( "Your age is " + customer.getAge() + "\n");
-        infoText.append("You have just earned " + rewards.getrewardPoints() + " reward points");	
-        
-        
-
-
-		//Creates new linkedlist + rewards
-		LinkedList<Customer>cust1;
-		cust1 = new LinkedList<Customer>( );
-		cust1.add(customer);
-
-		//Rewards rewards;
-		LinkedList<Rewards>reward1;
-		reward1 = new LinkedList <Rewards>();
-		rewards.getrewardPoints();
-		reward1.add(rewards);
-
-
-//saves to file, http://beginwithjava.blogspot.ie/2011/04/java-file-save-and-file-load-objects.html
-
-try{  // Catch errors in I/O if necessary.
-
-FileOutputStream saveFile=new FileOutputStream("SaveCust.dat");
-
-// Create an ObjectOutputStream to put objects into save file.
-ObjectOutputStream save = new ObjectOutputStream(saveFile);
-
-// Now we do the save.
-
-save.writeObject(cust1);
-save.writeObject(reward1);
-
-// Close the file.
-save.close(); // This also closes saveFile.
-}
-catch(Exception exc){
-exc.printStackTrace(); // If there was an error, print the info.
-}          
-        }
-    }
-}
-
-
-		
-		
+	
+	        // display the list, using an iterator
+	        Iterator<Customer> iterator = cust.iterator();
+	        while (iterator.hasNext()) {
+	            customer = iterator.next();
+	        
+	        //adds input to the jtextarea infotext	
+	        infoText.append( "Your name is " + customer.getName() + "\n");
+	        infoText.append( "Your address is " + customer.getAddress() + "\n");
+	        infoText.append( "Your age is " + customer.getAge() + "\n");
+	        infoText.append("You have just earned " + rewards.getrewardPoints() + " reward points");	
+	        
+	        
+	
+	
+			//Creates new linkedlist + rewards
+			LinkedList<Customer>cust1;
+			cust1 = new LinkedList<Customer>( );
+			cust1.add(customer);
+	
+			//Rewards rewards;
+			LinkedList<Rewards>reward1;
+			reward1 = new LinkedList <Rewards>();
+			rewards.getrewardPoints();
+			reward1.add(rewards);
+	
+	
+			//saves to file, http://beginwithjava.blogspot.ie/2011/04/java-file-save-and-file-load-objects.html
+	
+			try{  // Catch errors in I/O if necessary.
+			
+			FileOutputStream saveFile=new FileOutputStream("SaveCust.dat");
+			
+			// Create an ObjectOutputStream to put objects into save file.
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			
+			// Now we do the save.
+			
+			save.writeObject(cust1);
+			save.writeObject(reward1);
+			
+			// Close the file.
+			save.close(); // This also closes saveFile.
+			}
+			catch(Exception exc){
+			exc.printStackTrace(); // If there was an error, print the info.
+			}          
+			        }
+			    }
+			}
+			
+			
+					
+					
